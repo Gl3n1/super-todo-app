@@ -46,7 +46,7 @@ class CheckboxList extends React.Component {
               tabIndex={-1}
               disableRipple
             />
-            <ListItemText primary={`${index}. ${value + 1}`} />
+            <ListItemText primary={`${index}. ${value}`} />
           </ListItem>
         ))}
       </List>

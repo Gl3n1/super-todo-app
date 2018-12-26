@@ -25,6 +25,8 @@ class App extends Component {
 
 
   render() {
+    //Todo: Add Props types
+    //Todo: Connect with redux
     return (
       <div className="App">
         <Header />
