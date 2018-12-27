@@ -18,9 +18,22 @@ class App extends Component {
   };
 
   handleClick = () => {
-    this.setState({
-      todoList: [...this.state.todoList, this.state.name]
-    })
+    if (this.state.todoList[this.state.todoList.length - 1] !== this.state.name) {
+      this.setState({
+        todoList: [...this.state.todoList, this.state.name],
+        name: ''
+      })
+    }
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.todoList[this.state.todoList.length - 1] !== this.state.name) {
+      this.setState({
+        todoList: [...this.state.todoList, this.state.name],
+        name: ''
+      })
+    }
   };
 
 
@@ -32,7 +45,8 @@ class App extends Component {
         <Header />
         <TextFields
           handleChange={this.handleChange}
-        />
+          handleSubmit={this.handleSubmit}
+         />
         <FloatingActionButtons
           handleClick={this.handleClick}
         />
