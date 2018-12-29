@@ -25,10 +25,9 @@ class TextFields extends React.Component {
 
   render() {
     const { classes, handleChange } = this.props;
-    console.log(this.props)
     return (
       <form className={classes.container} noValidate autoComplete="off"
-        onSubmit={this.props.handleSubmit}
+        onSubmit={this.props.addItem}
       >
         <TextField
           id="standard-name"

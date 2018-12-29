@@ -10,8 +10,8 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 class CheckboxList extends React.Component {
@@ -46,7 +46,10 @@ class CheckboxList extends React.Component {
               tabIndex={-1}
               disableRipple
             />
-            <ListItemText primary={`${index}. ${value}`} />
+            <ListItemText 
+              primary={`${index}.`}
+              secondary={`${value}`}
+            />
           </ListItem>
         ))}
       </List>

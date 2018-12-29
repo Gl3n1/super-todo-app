@@ -1,12 +1,17 @@
-const todoReducer = (state = [],  action) => {
+import {ADD_TODO} from '../Actions/actions';
+
+const initialState = {
+  todoList:  []
+};
+
+const todoReducer = (state = initialState,  action) => {
     switch(action.type) {
-        case 'ADD_TODO':
-            return [
+        case ADD_TODO:
+            return {
                 ...state,
-                {
-                    todoList: action
-                }
-            ];
+                todoList: [...state.todoList,action.todoItem]
+            };
+            //Todo: add remove item action here
         default:
             return state
     }

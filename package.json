@@ -9,7 +9,9 @@
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2"
+    "react-redux": "^6.0.0",
+    "react-scripts": "2.1.2",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,5 +27,13 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "precommit": "NODE_ENV=production lint-staged",
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "pretty-quick --staged",
+      "eslint src/ --fix",
+      "git add"
+    ]
+  }
 }
