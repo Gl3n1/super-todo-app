@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header';
 import TextFields from '../TextFields';
 import AddListItem from '../AddListItem';
-import CheckboxList from '../CheckboxList';
+import CheckboxList from '../CheckboxList/';
 import RemoveListItem from '../RemoveListItem';
 import Grid from '@material-ui/core/Grid';
 
@@ -34,17 +34,9 @@ class App extends Component {
 
   removeItem = (e) => {
     e.preventDefault();
-    const { removeItem, todoList } = this.props;
-    const currentItem = this.state.name;
-    const prevItem = todoList[todoList.length-1];
+    const { removeTodo, todoList } = this.props;
 
-    if(currentItem === "") {
-        alert("Need to add a Task!")
-    } else if(currentItem === prevItem) {
-         alert("you can't have the same task twice!")
-    } else {
-      // removeItem(this.state.name);
-    }
+    return todoList.length !== 0 ? removeTodo() : alert('nothing to remove!')
   }
 
 
@@ -66,7 +58,7 @@ class App extends Component {
          </Grid>
          <Grid item xs={2}>
             <RemoveListItem 
-              handleClick={this.addItem}
+              handleClick={this.removeItem}
             />     
             </Grid>       
          </Grid>
