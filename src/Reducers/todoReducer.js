@@ -1,7 +1,15 @@
-import {ADD_TODO , REMOVE_TODO, ADD_SELECT_TODO, REMOVE_SELECT_TODO} from '../Actions/actions';
+import {
+    ADD_TODO , 
+    REMOVE_TODO, 
+    ADD_SELECT_TODO, 
+    REMOVE_SELECT_TODO,
+    SAVE_TODO_PENDING,
+    SAVE_TODO_SUCCESS,
+    SAVE_TODO_ERROR
+} from '../Actions/actions';
 
 const initialState = {
-  todoList:  ['eat','sleep','drink'],
+  todoList:  [],
   checked: []
 };
 
@@ -27,6 +35,23 @@ const todoReducer = (state = initialState,  action) => {
             return {
                 ...state,
                 checked: state.checked.filter(item=>item !== action.selectedItem)
+            }
+        case SAVE_TODO_PENDING:
+            return {
+                ...state,
+                saveTodoPending: true
+            }
+        case SAVE_TODO_SUCCESS:
+            return {
+                ...state,
+                saveTodoPending: false,
+                saveTodoSuccess: true
+            }
+        case SAVE_TODO_ERROR:
+            return {
+                ...state,
+                saveTodoPending: false,
+                saveTodoError: true
             }
         default:
             return state

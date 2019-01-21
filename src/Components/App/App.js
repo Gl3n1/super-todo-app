@@ -18,6 +18,7 @@ class App extends Component {
   };
 
   addItem = (e) => {
+    const { saveTodo } = this.props;
     e.preventDefault();
     const { addTodo, todoList } = this.props;
     const currentItem = this.state.name;
@@ -29,6 +30,7 @@ class App extends Component {
          alert("you can't have the same task twice!")
     } else {
       addTodo(this.state.name);
+      saveTodo(this.state.name);
     }
   };
 

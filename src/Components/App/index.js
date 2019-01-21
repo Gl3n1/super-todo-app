@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import App from './App';
-import { addTodo, removeTodo } from '../../Actions/actions';
+import { addTodo, removeTodo, saveTodo } from '../../Actions/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -8,4 +8,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { addTodo , removeTodo })(App);
+export default connect(mapStateToProps, { addTodo , removeTodo, saveTodo })(App);
