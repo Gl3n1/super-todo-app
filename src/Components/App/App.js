@@ -8,7 +8,9 @@ import Grid from '@material-ui/core/Grid';
 
 class App extends Component {
   state = {
-    name: ''
+    name: '',
+    todoObj: {},
+    numberofTodos: 0
   };
 
   handleChange = name => event => {
@@ -31,6 +33,13 @@ class App extends Component {
     } else {
       addTodo(this.state.name);
       saveTodo(this.state.name);
+      this.setState({
+        todoObj: {
+          ...this.state.todoObj,
+          [this.state.numberofTodos]: this.state.name
+        },
+        numberofTodos: this.state.numberofTodos + 1
+      })
     }
   };
 

@@ -30,28 +30,34 @@ class CheckboxList extends React.Component {
     }
   };
 
+  populateList = () => {
+    const { todoList } = this.props;
+    const items = [];
+    for(let todo in todoList) {
+      items.push(
+        <ListItem key={todoList[todo]} role={undefined} dense button onClick={this.handleToggle(todoList[todo])}>
+          <Checkbox
+            checked={this.props.checked.indexOf(todoList[todo]) !== -1}
+            tabIndex={-1}
+            disableRipple
+          />
+          <ListItemText 
+            primary={`${todo}.`}
+            secondary={`${todoList[todo]}`}
+          />
+        </ListItem>
+      )
+    }
+    return items
+  }
+
   render() {
-    const { classes, todoList } = this.props;
+    const { classes } = this.props;
     return (
       <List className={classes.root}>
-        {todoList.map((value,index) => {
-          // console.log(this.props.checked.indexOf(value))
-          return (
-            <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
-              <Checkbox
-                checked={this.props.checked.indexOf(value) !== -1}
-                tabIndex={-1}
-                disableRipple
-              />
-              <ListItemText 
-                primary={`${index}.`}
-                secondary={`${value}`}
-              />
-            </ListItem>
-          )
-        })}
+        {this.populateList()}
       </List>
-    );
+    )
   }
 }
 

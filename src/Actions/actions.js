@@ -32,11 +32,11 @@ export const saveTodo = (todoItem) => {
         })
         .then(function (response) {
             dispatch(saveTodoSuccess())
-            console.log(response);
+            // console.log(response);
         })
         .catch(function (error) {
             dispatch(saveTodoError())
-            console.log(error);
+            // console.log(error);
         });
     };
 }

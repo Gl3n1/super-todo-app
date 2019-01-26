@@ -8,9 +8,15 @@ import {
     SAVE_TODO_ERROR
 } from '../Actions/actions';
 
+import '../utils/objectUtilities.js';
+
 const initialState = {
-  todoList:  [],
-  checked: []
+  todoList:  {
+      1: 'eat',
+      2: 'sleep'
+  },
+  checked: [],
+  numberofTodos: 0
 };
 
 const todoReducer = (state = initialState,  action) => {
@@ -18,13 +24,18 @@ const todoReducer = (state = initialState,  action) => {
         case ADD_TODO:
             return {
                 ...state,
-                todoList: [...state.todoList,action.todoItem]
+                todoList: {
+                    ...state.todoList,
+                    [state.numberofTodos] : action.todoItem
+                },
+                numberofTodos: state.numberofTodos + 1
             };
             //Todo: add remove item action here
         case REMOVE_TODO:
             return {
                 ...state,
-                todoList: state.todoList.filter(item=>!state.checked.includes(item))
+                // todoList: state.todoList.filter(item=>!state.checked.includes(item)),
+                todoList: Object.filter(state.todoList, item=>!state.checked.includes(item))
             }
         case ADD_SELECT_TODO:
             return {
