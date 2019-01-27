@@ -30,7 +30,9 @@ const todoReducer = (state = initialState,  action) => {
         case REMOVE_TODO:
             return {
                 ...state,
-                todoList: Object.filter(state.todoList, item=>!state.checked.includes(item))
+                todoList: Object.filter(state.todoList, item=>!state.checked.includes(item)),
+                checked: [],
+                numberofTodos: state.numberofTodos - state.checked.length
             }
         case ADD_SELECT_TODO:
             return {
