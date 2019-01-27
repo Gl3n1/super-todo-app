@@ -30,14 +30,19 @@ class CheckboxList extends React.Component {
     }
   };
 
+  componentDidMount() {
+    const { getTodo } = this.props;
+    getTodo();
+  }
+
   populateList = () => {
-    const { todoList } = this.props;
+    const { todoList, checked } = this.props;
     const items = [];
     for(let todo in todoList) {
       items.push(
         <ListItem key={todoList[todo]} role={undefined} dense button onClick={this.handleToggle(todoList[todo])}>
           <Checkbox
-            checked={this.props.checked.indexOf(todoList[todo]) !== -1}
+            checked={checked.indexOf(todoList[todo]) !== -1}
             tabIndex={-1}
             disableRipple
           />

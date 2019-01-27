@@ -38,8 +38,13 @@ class App extends Component {
 
   removeItem = (e) => {
     e.preventDefault();
-    const { removeTodo, todoList } = this.props;
-    return todoList.length !== 0 ? removeTodo() : alert('nothing to remove!')
+    const { removeTodo, todoList, removeSaveTodo } = this.props;
+    if(todoList.length !== 0) {
+      removeTodo();
+      removeSaveTodo();
+    } else {
+      alert('nothing to remove!')
+    }
   }
 
 
@@ -69,6 +74,7 @@ class App extends Component {
         <CheckboxList
           inputItem={this.state.name}
           todoList={this.props.todoList}
+          checked={this.props.checked}
         />
       </div>
     );

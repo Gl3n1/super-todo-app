@@ -5,7 +5,8 @@ import {
     REMOVE_SELECT_TODO,
     SAVE_TODO_PENDING,
     SAVE_TODO_SUCCESS,
-    SAVE_TODO_ERROR
+    SAVE_TODO_ERROR,
+    GET_TODO_SUCCESS
 } from '../Actions/actions';
 
 import '../utils/objectUtilities.js';
@@ -18,12 +19,18 @@ const initialState = {
 
 const todoReducer = (state = initialState,  action) => {
     switch(action.type) {
+        case GET_TODO_SUCCESS:
+            return {
+                ...state,
+                todoList: action.todoList,
+                numberofTodos: action.todoList.length
+            }
         case ADD_TODO:
             return {
                 ...state,
                 todoList: {
                     ...state.todoList,
-                    [state.numberofTodos + 1] : action.todoItem
+                    [state.numberofTodos] : action.todoItem
                 },
                 numberofTodos: state.numberofTodos + 1
             };

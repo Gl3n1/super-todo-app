@@ -7,6 +7,25 @@ export const REMOVE_SELECT_TODO = 'REMOVE_SELECT_TODO';
 export const SAVE_TODO_PENDING = 'SAVE_TODO_PENDING';
 export const SAVE_TODO_SUCCESS = 'SAVE_TODO_SUCCESS';
 export const SAVE_TODO_ERROR = 'SAVE_TODO_ERROR';
+export const GET_TODO_PENDING = 'GET_TODO_PENDING';
+export const GET_TODO_SUCCESS = 'GET_TODO_SUCCESS';
+export const GET_TODO_ERROR = 'GET_TODO_ERROR';
+export const REMOVE_TODO_PENDING = 'REMOVE_TODO_PENDING';
+export const REMOVE_TODO_SUCCESS = 'REMOVE_TODO_SUCCESS';
+export const REMOVE_TODO_ERROR = 'REMOVE_TODO_ERROR';
+
+export const getTodoPending = () => ({
+    type: GET_TODO_PENDING
+})
+
+export const getTodoSuccess = (todoList) => ({
+    type: GET_TODO_SUCCESS,
+    todoList
+})
+
+export const getTodoError = () => ({
+    type: GET_TODO_ERROR
+})
 
 //discuss about local state and when in post. should you have 2 seperate actions for 1 action?
 
@@ -15,10 +34,18 @@ export const addTodo = (todoItem) => ({
     todoItem
 });
 
-export const removeTodo = (todoItems) => ({
-    type: REMOVE_TODO,
-    todoItems
-})
+export const getTodo = () => {
+    return dispatch => {
+        dispatch(getTodoPending());
+        axios.get('/todolist.json')
+        .then(function (response) {
+            dispatch(getTodoSuccess(response.data.todoList))
+        })
+        .catch(function (error) {
+            dispatch(getTodoError())
+        });
+    }
+}
 
 export const saveTodo = (todoItem) => {
     return (dispatch, getState) => {
@@ -40,6 +67,39 @@ export const saveTodo = (todoItem) => {
         });
     };
 }
+
+export const removeTodo = (todoItems) => ({
+    type: REMOVE_TODO,
+    todoItems
+})
+
+export const removeSaveTodo = () => {
+    return (dispatch, getState) => {
+        dispatch(removeTodoPending())
+        const getTodoList = getState().todoList;
+        axios.put('/todolist.json', {
+            todoList: getTodoList
+        })
+        .then(function (response) {
+            dispatch(removeTodoSuccess())
+        })
+        .catch(function (error) {
+            dispatch(removeTodoError())
+        });
+    }
+}
+
+const removeTodoPending = () => ({
+    type: REMOVE_TODO_PENDING
+})
+
+const removeTodoSuccess = () => ({
+    type: REMOVE_TODO_SUCCESS
+})
+
+const removeTodoError = () => ({
+    type: REMOVE_TODO_ERROR
+})
 
 const saveTodoPending = () => ({
     type: SAVE_TODO_PENDING
