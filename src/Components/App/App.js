@@ -8,37 +8,30 @@ import Grid from '@material-ui/core/Grid';
 
 class App extends Component {
   state = {
-    name: '',
-    todoObj: {},
-    numberofTodos: 0
+    name: ''
   };
 
-  handleChange = name => event => {
+  handleChange = e => {
     this.setState({
-      [name]: event.target.value,
+      name: e.target.value,
     });
   };
 
   addItem = (e) => {
-    const { saveTodo } = this.props;
+    const { saveTodo, addTodo, todoList } = this.props;
     e.preventDefault();
-    const { addTodo, todoList } = this.props;
     const currentItem = this.state.name;
-    const prevItem = todoList[todoList.length-1];
 
     if(currentItem === "") {
         alert("Need to add a Task!")
-    } else if(currentItem === prevItem) {
+        //take the todolist object and return an array of obj values. compare with current name.
+    } else if(Object.values(todoList).includes(currentItem)) {
          alert("you can't have the same task twice!")
     } else {
       addTodo(this.state.name);
       saveTodo(this.state.name);
       this.setState({
-        todoObj: {
-          ...this.state.todoObj,
-          [this.state.numberofTodos]: this.state.name
-        },
-        numberofTodos: this.state.numberofTodos + 1
+        name: ''
       })
     }
   };
@@ -46,7 +39,6 @@ class App extends Component {
   removeItem = (e) => {
     e.preventDefault();
     const { removeTodo, todoList } = this.props;
-
     return todoList.length !== 0 ? removeTodo() : alert('nothing to remove!')
   }
 
@@ -60,6 +52,7 @@ class App extends Component {
         <TextFields
           handleChange={this.handleChange}
           addItem={this.addItem}
+          name={this.state.name}
          />
          <Grid container spacing={24}>
          <Grid item xs={2}>

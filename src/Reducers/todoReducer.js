@@ -11,10 +11,7 @@ import {
 import '../utils/objectUtilities.js';
 
 const initialState = {
-  todoList:  {
-      1: 'eat',
-      2: 'sleep'
-  },
+  todoList:  {},
   checked: [],
   numberofTodos: 0
 };
@@ -26,15 +23,13 @@ const todoReducer = (state = initialState,  action) => {
                 ...state,
                 todoList: {
                     ...state.todoList,
-                    [state.numberofTodos] : action.todoItem
+                    [state.numberofTodos + 1] : action.todoItem
                 },
                 numberofTodos: state.numberofTodos + 1
             };
-            //Todo: add remove item action here
         case REMOVE_TODO:
             return {
                 ...state,
-                // todoList: state.todoList.filter(item=>!state.checked.includes(item)),
                 todoList: Object.filter(state.todoList, item=>!state.checked.includes(item))
             }
         case ADD_SELECT_TODO:

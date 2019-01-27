@@ -24,7 +24,7 @@ const styles = theme => ({
 class TextFields extends React.Component {
 
   render() {
-    const { classes, handleChange } = this.props;
+    const { classes, handleChange, name } = this.props;
     return (
       <form className={classes.container} noValidate autoComplete="off"
         onSubmit={this.props.addItem}
@@ -33,8 +33,8 @@ class TextFields extends React.Component {
           id="standard-name"
           label="Todo"
           className={classes.textField}
-          value={this.props.name}
-          onChange={handleChange('name')}
+          value={name}
+          onChange={handleChange}
           margin="normal"
         />
       </form>
