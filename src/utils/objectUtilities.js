@@ -3,7 +3,7 @@ Object.filter = (obj, predicate) => {
 
     return newObj.length !== 0 ? Object.assign(
         ...newObj.map(key => ({
-            [newObj.indexOf(key) + 1] : obj[key]
+            [newObj.indexOf(key)] : obj[key]
         }))
         ) : {}
 }

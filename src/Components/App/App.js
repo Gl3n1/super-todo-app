@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../Header';
 import TextFields from '../TextFields';
 import AddListItem from '../AddListItem';
 import CheckboxList from '../CheckboxList/';
@@ -53,22 +52,23 @@ class App extends Component {
     //Todo: Refactor with proper component names
     return (
       <div className="App">
-        <Header />
         <TextFields
           handleChange={this.handleChange}
           addItem={this.addItem}
           name={this.state.name}
          />
-         <Grid container spacing={24}>
-         <Grid item xs={2}>
+         <Grid container >
+          <Grid item xs={2}>
             <AddListItem
               addItem={this.addItem}
+              loading={this.props.saveTodoPending}
             />
-         </Grid>
-         <Grid item xs={2}>
-            <RemoveListItem 
-              handleClick={this.removeItem}
-            />     
+            </Grid>
+            <Grid item xs={2}>
+              <RemoveListItem 
+                handleClick={this.removeItem}
+                loading={this.props.removeTodoPending}
+              />     
             </Grid>       
          </Grid>
         <CheckboxList

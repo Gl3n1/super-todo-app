@@ -39,6 +39,7 @@ class CheckboxList extends React.Component {
     const { todoList, checked } = this.props;
     const items = [];
     for(let todo in todoList) {
+      const currentItemNum = parseInt(todo) + 1;
       items.push(
         <ListItem key={todoList[todo]} role={undefined} dense button onClick={this.handleToggle(todoList[todo])}>
           <Checkbox
@@ -47,7 +48,7 @@ class CheckboxList extends React.Component {
             disableRipple
           />
           <ListItemText 
-            primary={`${todo}.`}
+            primary={`${currentItemNum}.`}
             secondary={`${todoList[todo]}`}
           />
         </ListItem>

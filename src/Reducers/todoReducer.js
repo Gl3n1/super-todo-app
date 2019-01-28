@@ -6,7 +6,10 @@ import {
     SAVE_TODO_PENDING,
     SAVE_TODO_SUCCESS,
     SAVE_TODO_ERROR,
-    GET_TODO_SUCCESS
+    GET_TODO_SUCCESS,
+    REMOVE_TODO_PENDING,
+    REMOVE_TODO_SUCCESS,
+    REMOVE_TODO_ERROR
 } from '../Actions/actions';
 
 import '../utils/objectUtilities.js';
@@ -14,7 +17,9 @@ import '../utils/objectUtilities.js';
 const initialState = {
   todoList:  {},
   checked: [],
-  numberofTodos: 0
+  numberofTodos: 0,
+  saveTodoPending: false,
+  removeTodoPending: false
 };
 
 const todoReducer = (state = initialState,  action) => {
@@ -68,6 +73,22 @@ const todoReducer = (state = initialState,  action) => {
                 saveTodoPending: false,
                 saveTodoError: true
             }
+        case REMOVE_TODO_PENDING:
+            return {
+                ...state,
+                removeTodoPending: true,
+            }
+        case REMOVE_TODO_SUCCESS:
+            return {
+                ...state,
+                removeTodoPending: false,
+                saveTodoSuccess: true
+            }
+        case REMOVE_TODO_ERROR:
+            return {
+                ...state,
+                saveTodoSuccess: false
+            }    
         default:
             return state
     }

@@ -5,7 +5,9 @@ import { addTodo, removeTodo, saveTodo, removeSaveTodo } from '../../Actions/act
 const mapStateToProps = (state) => {
   return {
     todoList: state.todoList,
-    checked: state.checked
+    checked: state.checked,
+    saveTodoPending: state.saveTodoPending,
+    removeTodoPending: state.removeTodoPending
   }
 }
 
