@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import App from './App';
-import { addTodo, removeTodo, saveTodo, removeSaveTodo } from '../../Actions/actions';
+import { addTodo, removeTodo, saveTodo, removeSaveTodo } from '../../Actions/todoActions';
 
 const mapStateToProps = (state) => {
   return {

@@ -35,20 +35,21 @@ class PaperSheet extends React.Component {
   };
 
   handleSubmit = e => {
-    if(this.state.registrationType === 'public') {
-      
-    }
+    if(this.state.registrationType === '') {
+      alert('you need to select a registration type!')
+    } 
   }
 
   render() {
     const { classes } = this.props;
+    const button = <Button variant="contained" color="primary" type='submit' className={classes.button}>Select</Button>
     return (
       <div>
         <Paper className={classes.root} elevation={3}>
           <Typography variant="h6" component="h6">
             Registration
           </Typography>
-          <form onSubmit={this.handleSubmit()}>
+          <form onSubmit={this.handleSubmit}>
           <FormControl component="fieldset" className={classes.formControl}>
             <RadioGroup
               aria-label="Registration"
@@ -57,17 +58,13 @@ class PaperSheet extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              <FormControlLabel value="App" control={<Radio />} label="Public" />
+              <FormControlLabel value="public" control={<Radio />} label="Public" />
               <FormControlLabel value="private" disabled control={<Radio />} label="Private" />
               <FormControlLabel value="local" disabled control={<Radio />} label="Local" />
             </RadioGroup>
           </FormControl>
           <br />
-          <Link to={`/${this.state.registrationType}`}>
-            <Button variant="contained" color="primary" className={classes.button}>
-              Select
-            </Button>
-          </Link>
+            {this.state.registrationType !== '' ? <Link to="/App">{button}</Link> : button}
           </form>
         </Paper>
       </div>

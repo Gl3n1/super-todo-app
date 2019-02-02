@@ -10,12 +10,11 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  }
+    backgroundColor: theme.palette.background.paper,
+  },
 });
 
 class CheckboxList extends React.Component {
-
   handleToggle = value => () => {
     const { checked, addSelectTodo, removeSelectTodo } = this.props;
     const currentIndex = checked.indexOf(value);
@@ -38,32 +37,34 @@ class CheckboxList extends React.Component {
   populateList = () => {
     const { todoList, checked } = this.props;
     const items = [];
-    for(let todo in todoList) {
+    for (let todo in todoList) {
       const currentItemNum = parseInt(todo) + 1;
       items.push(
-        <ListItem key={todoList[todo]} role={undefined} dense button onClick={this.handleToggle(todoList[todo])}>
+        <ListItem
+          key={todoList[todo]}
+          role={undefined}
+          dense
+          button
+          onClick={this.handleToggle(todoList[todo])}
+        >
           <Checkbox
             checked={checked.indexOf(todoList[todo]) !== -1}
             tabIndex={-1}
             disableRipple
           />
-          <ListItemText 
+          <ListItemText
             primary={`${currentItemNum}.`}
             secondary={`${todoList[todo]}`}
           />
         </ListItem>
-      )
+      );
     }
-    return items
-  }
+    return items;
+  };
 
   render() {
     const { classes } = this.props;
-    return (
-      <List className={classes.root}>
-        {this.populateList()}
-      </List>
-    )
+    return <List className={classes.root}>{this.populateList()}</List>;
   }
 }
 

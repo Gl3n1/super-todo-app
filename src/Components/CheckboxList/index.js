@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CheckboxList from './CheckboxList';
-import { addSelectTodo, removeSelectTodo, getTodo } from '../../Actions/actions';
+import { addSelectTodo, removeSelectTodo, getTodo } from '../../Actions/todoActions';
 
 const mapStateToProps = (state) => ({
   checked: state.checked
