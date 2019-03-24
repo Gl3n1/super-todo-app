@@ -8,6 +8,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { Link } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
@@ -43,56 +45,74 @@ class PaperSheet extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const button = (
+    const button = type => (
       <Button
         variant="contained"
         color="primary"
         type="submit"
         className={classes.button}
       >
-        Select
+        {type}
       </Button>
     );
+    let next = '';
+
+    switch (this.state.registrationType) {
+      case 'public':
+        next = <Link to="/App">{button('Select')}</Link>;
+        break;
+      case 'private':
+        next = <LoginForm />;
+    }
+
     return (
       <div>
         <Paper className={classes.root} elevation={3}>
           <Typography variant="h6" component="h6">
             Registration
           </Typography>
-          <form onSubmit={this.handleSubmit}>
-            <FormControl component="fieldset" className={classes.formControl}>
-              <RadioGroup
-                aria-label="Registration"
-                name="Registration"
-                className={classes.group}
-                value={this.state.value}
-                onChange={this.handleChange}
-              >
-                <FormControlLabel
-                  value="public"
-                  control={<Radio />}
-                  label="Public"
-                />
-                <FormControlLabel
-                  value="private"
-                  control={<Radio />}
-                  label="Private"
-                />
-                <FormControlLabel
-                  value="local"
-                  disabled
-                  control={<Radio />}
-                  label="Local"
-                />
-              </RadioGroup>
-            </FormControl>
-            <br />
-            {this.state.registrationType !== '' ? (
-              <Link to="/App">{button}</Link>
-            ) : (
-              button
-            )}
-          </form>
+          <Grid container>
+            <Grid item sm={12}>
+              <form onSubmit={this.handleSubmit}>
+                <FormControl
+                  component="fieldset"
+                  className={classes.formControl}
+                >
+                  <RadioGroup
+                    aria-label="Registration"
+                    name="Registration"
+                    className={classes.group}
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                  >
+                    <FormControlLabel
+                      value="public"
+                      control={<Radio />}
+                      label="Public"
+                    />
+                    <FormControlLabel
+                      value="private"
+                      control={<Radio />}
+                      label="Private"
+                    />
+                    <FormControlLabel
+                      value="local"
+                      disabled
+                      control={<Radio />}
+                      label="Local"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <br />
+                {/* {this.state.registrationType !== '' ? (
+                  <Link to="/App">{button('Select')}</Link>
+                ) : (
+                  button('Select')
+                )} */}
+                {next}
+              </form>
+            </Grid>
+          </Grid>
         </Paper>
       </div>
     );
