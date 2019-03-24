@@ -7,7 +7,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -15,14 +15,14 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     maxWidth: '300px',
-    margin: '50px auto'
+    margin: '50px auto',
   },
   group: {
     margin: `${theme.spacing.unit}px 0`,
   },
   button: {
-    marginTop: '20px'
-  }
+    marginTop: '20px',
+  },
 });
 
 class PaperSheet extends React.Component {
@@ -35,14 +35,24 @@ class PaperSheet extends React.Component {
   };
 
   handleSubmit = e => {
-    if(this.state.registrationType === '') {
-      alert('you need to select a registration type!')
-    } 
-  }
+    e.preventDefault();
+    if (this.state.registrationType === '') {
+      alert('you need to select a registration type!');
+    }
+  };
 
   render() {
     const { classes } = this.props;
-    const button = <Button variant="contained" color="primary" type='submit' className={classes.button}>Select</Button>
+    const button = (
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        className={classes.button}
+      >
+        Select
+      </Button>
+    );
     return (
       <div>
         <Paper className={classes.root} elevation={3}>
@@ -50,27 +60,43 @@ class PaperSheet extends React.Component {
             Registration
           </Typography>
           <form onSubmit={this.handleSubmit}>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <RadioGroup
-              aria-label="Registration"
-              name="Registration"
-              className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel value="public" control={<Radio />} label="Public" />
-              <FormControlLabel value="private" disabled control={<Radio />} label="Private" />
-              <FormControlLabel value="local" disabled control={<Radio />} label="Local" />
-            </RadioGroup>
-          </FormControl>
-          <br />
-            {this.state.registrationType !== '' ? <Link to="/App">{button}</Link> : button}
+            <FormControl component="fieldset" className={classes.formControl}>
+              <RadioGroup
+                aria-label="Registration"
+                name="Registration"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel
+                  value="public"
+                  control={<Radio />}
+                  label="Public"
+                />
+                <FormControlLabel
+                  value="private"
+                  control={<Radio />}
+                  label="Private"
+                />
+                <FormControlLabel
+                  value="local"
+                  disabled
+                  control={<Radio />}
+                  label="Local"
+                />
+              </RadioGroup>
+            </FormControl>
+            <br />
+            {this.state.registrationType !== '' ? (
+              <Link to="/App">{button}</Link>
+            ) : (
+              button
+            )}
           </form>
         </Paper>
       </div>
     );
   }
-  
 }
 
 export default withStyles(styles)(PaperSheet);
