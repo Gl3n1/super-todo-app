@@ -25,6 +25,10 @@ class LoginForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { username, password } = this.state;
+    if (username === '' && password === '') {
+      alert('please enter login credentials');
+    }
   };
 
   render() {

@@ -36,7 +36,7 @@ class PaperSheet extends React.Component {
     this.setState({ registrationType: event.target.value });
   };
 
-  handleSubmit = e => {
+  ç = e => {
     e.preventDefault();
     if (this.state.registrationType === '') {
       alert('you need to select a registration type!');
@@ -61,8 +61,6 @@ class PaperSheet extends React.Component {
       case 'public':
         next = <Link to="/App">{button('Select')}</Link>;
         break;
-      case 'private':
-        next = <LoginForm />;
     }
 
     return (
@@ -111,6 +109,7 @@ class PaperSheet extends React.Component {
                 )} */}
                 {next}
               </form>
+              {this.state.registrationType === 'private' ? <LoginForm /> : null}
             </Grid>
           </Grid>
         </Paper>
