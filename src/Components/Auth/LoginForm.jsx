@@ -26,9 +26,12 @@ class LoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    if (username === '' && password === '') {
-      alert('please enter login credentials');
-    }
+    // if (username === '' && password === '') {
+    //   alert('please enter login credentials');
+    // }
+    fetch('http://localhost:8000/users')
+      .then(res => res.json())
+      .then(res => console.log(res));
   };
 
   render() {

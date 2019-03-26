@@ -36,7 +36,7 @@ class PaperSheet extends React.Component {
     this.setState({ registrationType: event.target.value });
   };
 
-  ç = e => {
+  handleSubmit = e => {
     e.preventDefault();
     if (this.state.registrationType === '') {
       alert('you need to select a registration type!');
