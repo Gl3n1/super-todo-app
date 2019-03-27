@@ -26,12 +26,20 @@ class LoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    // if (username === '' && password === '') {
-    //   alert('please enter login credentials');
-    // }
-    fetch('http://localhost:8000/users')
-      .then(res => res.json())
-      .then(res => console.log(res));
+    if (username === '' && password === '') {
+      alert('please enter login credentials');
+    } else {
+      fetch('/users', {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify({
+          username: this.state.username,
+          password: this.state.password,
+        }), // data can be `string` or {object}!
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => console.log(res));
+    }
   };
 
   render() {
